@@ -34,7 +34,8 @@ export default function Login() {
       const user = userCredential.user;
       const idToken = await user.getIdToken();
 
-      const backendRes = await fetch("http://localhost:8080/api/auth", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const backendRes = await fetch(`${API_URL}/api/auth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ emailIdToken: idToken })
@@ -73,7 +74,8 @@ export default function Login() {
       
       if (result && result.user) {
         const idToken = await result.user.getIdToken();
-        const backendRes = await fetch("http://localhost:8080/api/auth", {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+        const backendRes = await fetch(`${API_URL}/api/auth`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ googleIdToken: idToken })

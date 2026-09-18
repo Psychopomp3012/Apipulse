@@ -56,7 +56,8 @@ export default function Dashboard() {
     try {
       const token = localStorage.getItem("apipulse_token");
       if (!token) return;
-      const res = await fetch("http://localhost:8080/api/apipulse/keys", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const res = await fetch(`${API_URL}/api/apipulse/keys`, {
         headers: { "Authorization": `Bearer ${token}` }
       });
       if (res.ok) {
@@ -82,7 +83,8 @@ export default function Dashboard() {
       const token = localStorage.getItem("apipulse_token");
       if (!token) return;
       
-      const res = await fetch("http://localhost:8080/api/apipulse/keys/generate", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const res = await fetch(`${API_URL}/api/apipulse/keys/generate`, {
         method: "POST",
         headers: { 
           "Authorization": `Bearer ${token}`,
@@ -121,7 +123,8 @@ export default function Dashboard() {
     try {
       const token = localStorage.getItem("apipulse_token");
       if (!token) return;
-      const res = await fetch(`http://localhost:8080/api/apipulse/keys/${id}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const res = await fetch(`${API_URL}/api/apipulse/keys/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });

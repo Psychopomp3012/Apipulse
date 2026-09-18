@@ -19,7 +19,8 @@ export default function Analytics() {
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const res = await fetch(`http://localhost:8080/api/apipulse/analytics?days=${days}`, {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+        const res = await fetch(`${API_URL}/api/apipulse/analytics?days=${days}`, {
           headers: {
             "Authorization": `Bearer ${token}`
           }
