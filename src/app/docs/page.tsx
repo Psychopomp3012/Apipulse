@@ -69,16 +69,18 @@ export default function Docs() {
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
+        let currentBaseUrl = "https://api.flightagent.dev";
         if (typeof window !== 'undefined') {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                setBaseUrl("http://localhost:8080");
+                currentBaseUrl = "http://localhost:8080";
+                setBaseUrl(currentBaseUrl);
             }
         }
 
         const controller = new AbortController();
         const signal = controller.signal;
 
-        fetch("http://localhost:8080/api/apipulse/docs", { signal })
+        fetch(`${currentBaseUrl}/api/apipulse/docs`, { signal })
             .then(res => {
                 if (!res.ok) throw new Error("Network response was not ok");
                 return res.json();
